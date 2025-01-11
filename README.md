@@ -69,10 +69,10 @@ This is a micro-frontend app responsible for displaying the user's insurance det
 
 | **Requirement**                                    | **Status** |
 | -------------------------------------------------- | ---------- |
-| High-level design document of the application     | -          |
-| Git Link to code for your application (Container app + 2 MFEs) | -          |
-| Readme file with instructions                     | -          |
-| Video recording showing all parameters (Running and hosted Containers, MFEs) | -          |
+| High-level design document of the application     |     Provided      |
+| Git Link to code for your application (Container app + 2 MFEs) | https://github.com/pankajexpressian/nagp_client_side_architecture/tree/main          |
+| Readme file with instructions                     | https://github.com/pankajexpressian/nagp_client_side_architecture/blob/main/README.md          |
+| Video recording showing all parameters (Running and hosted Containers, MFEs) | Provided          |
 
 ---
 
