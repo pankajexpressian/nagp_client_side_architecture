@@ -1,0 +1,41 @@
+/* CSS for the blinking text */
+.discount-text {
+    animation: blink 1s step-start 0s infinite;
+  }
+  
+  @keyframes blink {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+
+  /* Style for payment options */
+.payment-options {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.payment-option {
+  text-align: center;
+  padding: 10px;
+}
+
+.payment-option p {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #555;
+}
+
+.payment-option svg {
+  margin-bottom: 10px;
+}
+
+  
