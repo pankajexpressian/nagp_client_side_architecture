@@ -78,7 +78,7 @@ function initializeLocalStorage() {
   }
 }
 
-// Function to get user by ID from localStorage
+
 function getUserById(userId) {
   const users = JSON.parse(localStorage.getItem('users'));  
   return users.find(user => user.id === userId) || null; 

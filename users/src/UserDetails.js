@@ -4,74 +4,74 @@ import { createWorker } from "./CreateWorker";
 const UserDetails = () => {
   const [worker, setWorker] = useState(null);
   const [user, setUser] = useState(null);
-  const [sumAssured, setSumAssured] = useState(null); // For storing sum assured
-  const [workerReady, setWorkerReady] = useState(false); // Track if the worker is ready
-  const [loading, setLoading] = useState(false); // Loading state to show "Finding the best offers"
-  const [receivedMessage, setReceivedMessage] = useState(""); // Store the received message
+  const [sumAssured, setSumAssured] = useState(null); 
+  const [workerReady, setWorkerReady] = useState(false); 
+  const [loading, setLoading] = useState(false); 
+  const [receivedMessage, setReceivedMessage] = useState(""); 
 
   useEffect(() => {
-    // Create and load the worker when the component mounts
+    
     async function loadWorker() {
       const newWorker = await createWorker(__webpack_public_path__ + "worker.js");
       console.log("Worker loaded:", newWorker);
       setWorker(newWorker);
 
-      // Listen for messages from the worker
+     
       newWorker.onmessage = (e) => {
         console.log("Received from worker:", e.data);
-        setSumAssured(e.data.sumAssured); // Update sum assured state
-        setLoading(false); // Hide loading message when worker responds
+        setSumAssured(e.data.sumAssured); 
+        setLoading(false); 
       };
 
       newWorker.onerror = (e) => {
         console.error("Error in worker:", e);
-        setLoading(false); // Hide loading message on error
+        setLoading(false); 
       };
 
-      setWorkerReady(true); // Mark worker as ready after it's loaded
+      setWorkerReady(true); 
     }
 
-    loadWorker(); // Load worker
+    loadWorker(); 
 
-    // Fetch logged-in user data
+    
     const loggedInUserEmail = localStorage.getItem("LoggedInUserId");
     const users = JSON.parse(localStorage.getItem("users"));
     
     if (users && loggedInUserEmail) {
       const matchedUser = users.find((user) => user.email === loggedInUserEmail);
       if (matchedUser) {
-        setUser(matchedUser); // Set the user data
+        setUser(matchedUser); 
       } else {
         console.error("User not found in localStorage");
       }
     } else {
       console.error("User not found in localStorage");
     }
-  }, []); // Empty dependency array to run only once
+  }, []); 
 
   useEffect(() => {
-    // Listen for the custom event to update the message
+    
     const handleMessageEvent = (event) => {
-      setReceivedMessage(event.detail.message); // Update state with the message from the event
+      setReceivedMessage(event.detail.message); 
     };
 
-    // Add event listener for the custom event
+    
     window.addEventListener("sendMessageEvent", handleMessageEvent);
 
-    // Cleanup the event listener when the component is unmounted
+    
     return () => {
       window.removeEventListener("sendMessageEvent", handleMessageEvent);
     };
   }, []);
 
   useEffect(() => {
-    // Send user data to worker after it's found and worker is ready
+    
     if (user && workerReady) {
-      setLoading(true); // Show loading message before sending the message
+      setLoading(true); 
       worker.postMessage({ message: "start", user: user });
       console.log("Message sent to worker with user data:", { message: "start", user: user });
     }
-  }, [user, workerReady]); // Trigger this effect when user and workerReady are available
+  }, [user, workerReady]); 
 
   const loggedInUser = user || {
     policyNumber: "",
@@ -84,7 +84,7 @@ const UserDetails = () => {
   return (
     <div className="container">
       <div className="row">
-        {/* Section 1: User Details */}
+       
         <div className="col-md-6">
           <div className="card shadow-lg mb-4">
             <div className="card-header bg-success text-white">
@@ -100,17 +100,17 @@ const UserDetails = () => {
           </div>
         </div>
 
-        {/* Section 2: Sum Assured Calculation and Loading Message */}
+       
         <div className="col-md-6">
           <div className="card shadow-lg mb-4">
             <div className="card-header bg-info text-white">
               <h3>Offers</h3>
             </div>
             <div className="card-body">
-              {/* Show the loading message when calculating sum assured */}
+              
               {loading && <p>Finding the best offers for you...</p>}
 
-              {/* Show sum assured if available */}
+              
               {sumAssured !== null && (
                 <div className="text-success">
                   <p style={{ fontSize: "20px" }}><strong>Congratulations!</strong> 🎉</p><br />
@@ -119,7 +119,7 @@ const UserDetails = () => {
                   <button 
                     className="btn btn-primary mt-3"
                     onClick={() => {
-                      // Trigger apply action (you can redirect to another page or open a modal)
+                      
                       alert("Redirecting to the application page...");
                     }}
                   >
@@ -132,7 +132,7 @@ const UserDetails = () => {
         </div>
       </div>
 
-      {/* Display the received message at the bottom */}
+      
       {receivedMessage && (
         <div className="alert alert-info mt-4">
           <strong>Message Received:</strong> {receivedMessage}

@@ -11,10 +11,10 @@ module.exports = {
     historyApiFallback: true,
     proxy: [
       {
-        context: ['/src_worker_js.js'], // Proxy the worker script
-        target: 'http://localhost:3001', // MFE app server
-        changeOrigin: true,              // Ensure origin is set correctly for the target
-        secure: false,                   // Disable SSL verification if using HTTP
+        context: ['/src_worker_js.js'], 
+        target: 'http://localhost:3001', 
+        changeOrigin: true,              
+        secure: false,                   
       },
     ],
   },
@@ -38,15 +38,15 @@ module.exports = {
       {
         test: /\.scss$/i,
         use: [
-          "style-loader", // Inject styles into the DOM
-          "css-loader",   // Resolves CSS imports
-          "sass-loader",  // Compiles Sass to CSS
+          "style-loader", 
+          "css-loader",  
+          "sass-loader",  
         ],
       },
       {
-        test: /worker\.js$/,  // Ensure worker files are bundled
+        test: /worker\.js$/,  
         use: {
-          loader: 'worker-loader',  // Use worker-loader to handle worker scripts
+          loader: 'worker-loader',  
         },
       },
     ],

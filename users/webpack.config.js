@@ -9,12 +9,12 @@ module.exports = {
   devServer: {
     static: path.join(__dirname, "dist"),
     headers: {
-      'Access-Control-Allow-Origin': 'http://localhost:3000',  // Allow requests only from localhost:3000
-      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS', // Allow necessary methods
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization', // Allow necessary headers
+      'Access-Control-Allow-Origin': 'http://localhost:3000',  
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS', 
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization', 
     },
-    port: 3001, // Your MFE app running on this port
-    // You can add a proxy rule if necessary, but this should handle CORS directly.
+    port: 3001, 
+    
   },
   output: {
     publicPath: "auto",
@@ -36,13 +36,13 @@ module.exports = {
       {
         test: /\.scss$/i,
         use: [
-          "style-loader", // Inject styles into the DOM
-          "css-loader",   // Resolves CSS imports
-          "sass-loader",  // Compiles Sass to CSS
+          "style-loader", 
+          "css-loader",   
+          "sass-loader",  
         ],
       },
       {
-        test: /.worker\.js$/, // Ensure worker.js is handled by worker-loader
+        test: /.worker\.js$/, 
         use: { loader: 'worker-loader' },
       },
     ],

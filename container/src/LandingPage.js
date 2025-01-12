@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Suspense } from "react";
 import { useNavigate } from "react-router-dom";
-import { checkAuthentication, logout } from "./Auth";  // Import from Auth.js
+import { checkAuthentication, logout } from "./Auth";  
 
 const UserDetails = React.lazy(() => import("userdetails/UserDetails"));
 const InsuranceDetails = React.lazy(() =>
@@ -15,7 +15,7 @@ const LandingPage = ({ setIsAuthenticated }) => {
 
   useEffect(() => {
     if (!checkAuthentication()) {
-      // If not authenticated, redirect to login
+      
       navigate("/login");
       return;
     }
@@ -29,11 +29,11 @@ const LandingPage = ({ setIsAuthenticated }) => {
       setUser(matchedUser);
       console.log("matched user", matchedUser);
 
-      // Fetch insurance details from localStorage
+     
       const matchedInsuranceDetails = matchedUser.insurance;
       setInsuranceDetails(matchedInsuranceDetails);
     } else {
-      navigate("/login");  // If no matched user, redirect to login
+      navigate("/login");  
     }
   }, [navigate]);
 
@@ -41,19 +41,19 @@ const LandingPage = ({ setIsAuthenticated }) => {
   const handleShowInsuranceDetails = () => setShowUserDetails(false);
 
   const handleLogout = () => {
-    logout(setIsAuthenticated);  // Use logout from Auth.js
+    logout(setIsAuthenticated);  
     navigate("/login");
   };
 
   const handleSendMessage = () => {
     if (user) {
-      const message = "This is a test message from LandingPage";  // Modify this as required
-    const userId = user ? user.email : "Unknown User";  // Get the userId (email in this case)
+      const message = "This is a test message from LandingPage";  
+    const userId = user ? user.email : "Unknown User";  
     
-    // Get the current date and time
+    
     const timestamp = new Date().toLocaleString();
 
-    // Create the event with the userId, message, and timestamp
+    
     const event = new CustomEvent("sendMessageEvent", {
       detail: {
         userId: userId,
@@ -61,7 +61,7 @@ const LandingPage = ({ setIsAuthenticated }) => {
       },
     });
 
-    // Dispatch the event
+    
     window.dispatchEvent(event)
       console.log('event dispacthed', event);
     }
@@ -70,7 +70,6 @@ const LandingPage = ({ setIsAuthenticated }) => {
   return (
     <div className="container-fluid vh-100">
       <div className="row h-100">
-        {/* Sidebar */}
         <div className="col-md-3 bg-dark text-white p-4 d-flex flex-column h-100">
           <h4 className="text-center mb-4">Menu</h4>
           <div className="d-flex flex-column flex-grow-1">
@@ -87,7 +86,6 @@ const LandingPage = ({ setIsAuthenticated }) => {
               View Insurance Details
             </button>
 
-            {/* New button to send a message */}
             <button
               className="btn btn-info mb-3"
               onClick={handleSendMessage}
@@ -104,7 +102,7 @@ const LandingPage = ({ setIsAuthenticated }) => {
           </div>
         </div>
 
-        {/* Main Content */}
+    
         <div className="col-md-9 p-4">
           <h1>Welcome{user && `, ${user.name}`}</h1>
           <br />

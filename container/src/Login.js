@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { login } from "./Auth";  // Import login from Auth.js
-import DOMPurify from "dompurify";  // Import DOMPurify to sanitize inputs
+import { login } from "./Auth";  
+import DOMPurify from "dompurify"; 
 import Seeder from "./Seeder";
 
 const Login = ({ setIsAuthenticated }) => {
@@ -12,50 +12,49 @@ const Login = ({ setIsAuthenticated }) => {
   useEffect(() => {
 
     Seeder.initializeLocalStorage();
-    // Check if the user is already authenticated
+    
     const loggedInUserId = localStorage.getItem("LoggedInUserId");
     const isAuthenticated = localStorage.getItem("isAuthenticated");
 
-    // If the user is authenticated, redirect to landing page
+    
     if (loggedInUserId && isAuthenticated === "true") {
       navigate("/landingpage");
     }
   }, [navigate]);
 
-  // Sanitize function to remove < and > from the email input
+  
   const sanitizeInput = (input) => {
-    return input.replace(/[<>]/g, ""); // Remove < and > characters
+    return input.replace(/[<>]/g, ""); 
   };
 
-  // Email validation regex
+  
   const validateEmail = (email) => {
     const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
     return regex.test(email);
   };
 
   const handleSignIn = () => {
-    // Sanitize the email input before proceeding with the login check
+    
     const sanitizedEmail = sanitizeInput(email);
 
-    // Validate the email format
+   
     if (!validateEmail(sanitizedEmail)) {
       setErrorMessage("Please enter a valid email address.");
       setTimeout(() => {
-        setErrorMessage("");  // Hide error after 3 seconds
+        setErrorMessage("");  
       }, 3000);
       return;
     }
 
-    // Proceed with login if the email is valid
+  
     const error = login(sanitizedEmail, setIsAuthenticated);
 
     if (error) {
-      // Sanitize the error message before displaying it to avoid XSS
       const sanitizedError = DOMPurify.sanitize(error);
       setErrorMessage(sanitizedError);
 
       setTimeout(() => {
-        setErrorMessage("");  // Hide error after 3 seconds
+        setErrorMessage("");  
       }, 3000);
     } else {
       console.log("Login successful. Navigating to landing page.");

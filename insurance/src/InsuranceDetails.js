@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
 import Worker from "./worker";
-import './styles.css';  // Ensure your CSS is linked properly
+import './styles.css';  
 
 const InsuranceDetails = ({ insuranceDetails }) => {
   const messageFromWorker = Worker(5000);
@@ -12,43 +12,43 @@ const InsuranceDetails = ({ insuranceDetails }) => {
     insuranceProvider: "",
   };
 
-  // State to manage the visibility of the new card
+ 
   const [isCardVisible, setIsCardVisible] = useState(false);
 
-  // State to manage the selected payment option
+
   const [selectedPaymentOption, setSelectedPaymentOption] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   
-  // State for the received message from the event
+
   const [receivedMessage, setReceivedMessage] = useState(null);
 
-  // Listen to the 'sendMessageEvent' and update the message state
+  
   useEffect(() => {
     const handleMessageEvent = (event) => {
-      // Update the state with the received message
+      
       setReceivedMessage(event.detail.message);
     };
 
-    // Add event listener
+
     window.addEventListener('sendMessageEvent', handleMessageEvent);
 
-    // Cleanup event listener on component unmount
+
     return () => {
       window.removeEventListener('sendMessageEvent', handleMessageEvent);
     };
   }, []);
 
   const handlePayPremiumClick = () => {
-    // Check if a payment option is selected when the "Make Payment" button is clicked
+ 
     if (!selectedPaymentOption) {
-      // If no payment option is selected, show an error message
+
       setErrorMessage("Please select a payment method.");
       setTimeout(() => {
         setErrorMessage('');
       }, 3000);
     } else {
-      // Proceed with the payment if an option is selected
-      setErrorMessage('');  // Clear the error message
+    
+      setErrorMessage('');  
       alert("Proceeding with payment...");
     }
   };
@@ -63,7 +63,6 @@ const InsuranceDetails = ({ insuranceDetails }) => {
 
   return (
     <Fragment>
-      {/* Fun Fact Card at the top (in a single column) */}
       <div className="card shadow-lg mb-4">
         <div className="card-header bg-dark text-white">
           <h3>Fun Fact</h3>
@@ -71,9 +70,9 @@ const InsuranceDetails = ({ insuranceDetails }) => {
         <div className="card-body">{messageFromWorker}</div>
       </div>
 
-      {/* Row for two columns below the fun fact */}
+
       <div className="row">
-        {/* Left Column - Insurance Details */}
+
         <div className="col-md-6">
           <div className="card shadow-lg mb-4">
             <div className="card-header bg-success text-white">
@@ -107,9 +106,9 @@ const InsuranceDetails = ({ insuranceDetails }) => {
           </div>
         </div>
 
-        {/* Right Column - Payment Option */}
+
         <div className="col-md-6">
-          {/* Conditionally render this card when isCardVisible is true */}
+
           {isCardVisible && (
             <div className="card shadow-lg mb-4">
               <div className="card-header bg-warning text-black">
@@ -162,7 +161,7 @@ const InsuranceDetails = ({ insuranceDetails }) => {
                     </div>
                   </div>
                 </form> <br></br>
-                {/* Show error message if no payment option is selected */}
+
                 {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
               </div>
               <div className="card-footer d-flex justify-content-start align-items-center">
@@ -178,7 +177,7 @@ const InsuranceDetails = ({ insuranceDetails }) => {
         </div>
       </div>
 
-      {/* Display the received message at the bottom */}
+
       {receivedMessage && (
         <div className="alert alert-info mt-4">
           <strong>Message Received:</strong> {receivedMessage}

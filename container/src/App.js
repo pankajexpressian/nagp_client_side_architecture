@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './Login';
 import LandingPage from './LandingPage';
-import { checkAuthentication } from './Auth';  // Import the checkAuthentication function from Auth.js
+import { checkAuthentication } from './Auth';  
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    // Check if the user is authenticated using checkAuthentication from Auth.js
+   
     const isUserAuthenticated = checkAuthentication();
 
     if (isUserAuthenticated) {

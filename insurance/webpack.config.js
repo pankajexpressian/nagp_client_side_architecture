@@ -30,9 +30,9 @@ module.exports = {
       {
         test: /\.scss$/i,
         use: [
-          "style-loader", // Inject styles into the DOM
-          "css-loader",   // Resolves CSS imports
-          "sass-loader",  // Compiles Sass to CSS
+          "style-loader", 
+          "css-loader",   
+          "sass-loader",  
         ],
       },
     ],
@@ -42,7 +42,7 @@ module.exports = {
       name: 'insurancedetails',
       filename: 'remoteEntry.js',
       exposes: {
-        './InsuranceDetails': './src/InsuranceDetails', // Expose UserDetails component
+        './InsuranceDetails': './src/InsuranceDetails', 
       },
       shared: { react: { singleton: true }, 'react-dom': { singleton: true } },
     }),
