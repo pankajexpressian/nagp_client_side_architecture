@@ -1,6 +1,6 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { ModuleFederationPlugin } = require("webpack").container;
-const CopyPlugin =require('copy-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const path = require("path");
 
 module.exports = {
@@ -27,7 +27,6 @@ module.exports = {
           presets: ["@babel/preset-react"],
         },
       },
-   
       {
         test: /\.css$/i,
         use: ["style-loader", "css-loader"], 
@@ -41,10 +40,7 @@ module.exports = {
         ],
       },
       {
-        test: /.worker\.js$/, 
-        use: { loader: 'worker-loader' },
-      },
-      {
+        // Consolidated rule for handling worker.js files
         test: /worker\.js$/, 
         use: { loader: 'worker-loader' },
       },
@@ -62,8 +58,11 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './public/index.html',
     }),
+    // Copy worker.js from src to dist folder
     new CopyPlugin({
-      patterns:[{from:'./src/worker.js', to: 'worker.js'}]
+      patterns: [
+        { from: './src/worker.js', to: 'worker.js' }
+      ]
     })
   ],
 };
