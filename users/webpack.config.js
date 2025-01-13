@@ -9,7 +9,7 @@ module.exports = {
   devServer: {
     static: path.join(__dirname, "dist"),
     headers: {
-      'Access-Control-Allow-Origin': '*',  
+      'Access-Control-Allow-Origin': 'https://incredible-fenglisu-137792.netlify.app',  
       'Access-Control-Allow-Methods': 'GET, POST, OPTIONS', 
       'Access-Control-Allow-Headers': 'Content-Type, Authorization', 
     },
