@@ -1,7 +1,7 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { ModuleFederationPlugin } = require("webpack").container;
-const CopyPlugin = require('copy-webpack-plugin');
 const path = require("path");
+const CopyPlugin =require('copy-webpack-plugin');
 
 module.exports = {
   entry: "./src/index",
@@ -12,7 +12,9 @@ module.exports = {
       'Access-Control-Allow-Origin': '*',  
       'Access-Control-Allow-Methods': 'GET, POST, OPTIONS', 
       'Access-Control-Allow-Headers': 'Content-Type, Authorization', 
-    }
+    },
+    // port: 3002, 
+    
   },
   output: {
     publicPath: "auto",
@@ -29,7 +31,7 @@ module.exports = {
       },
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader"], 
+        use: ["style-loader", "css-loader"],
       },
       {
         test: /\.scss$/i,
@@ -40,8 +42,7 @@ module.exports = {
         ],
       },
       {
-        // Consolidated rule for handling worker.js files
-        test: /worker\.js$/, 
+        test: /.worker\.js$/, 
         use: { loader: 'worker-loader' },
       },
     ],
@@ -51,18 +52,15 @@ module.exports = {
       name: 'insurancedetails',
       filename: 'remoteEntry.js',
       exposes: {
-        './InsuranceDetails': './src/InsuranceDetails', 
+      './InsuranceDetails': './src/InsuranceDetails', 
       },
       shared: { react: { singleton: true }, 'react-dom': { singleton: true } },
     }),
     new HtmlWebpackPlugin({
       template: './public/index.html',
     }),
-    // // Copy worker.js from src to dist folder
-    // new CopyPlugin({
-    //   patterns: [
-    //     { from: './src/worker.js', to: 'worker.js' }
-    //   ]
-    // })
+    new CopyPlugin({
+      patterns:[{from:'./src/worker.js', to: 'worker.js'}]
+    })
   ],
 };
