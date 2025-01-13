@@ -1,3 +1,6 @@
+/*    /index.html   200
+
+
 # # Redirect requests to userdetails microfrontend
 # /userdetails/remoteEntry.js  https://nagp-users.netlify.app/remoteentry.js  200!
 
