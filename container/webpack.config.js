@@ -61,7 +61,7 @@ module.exports = {
       name: "shellapp",
       remotes: {
         userdetails: 'userdetails@https://nagp-users.netlify.app/remoteentry.js',
-        insurancedetails: 'insurancedetails@http://localhost:3002/remoteEntry.js',
+        insurancedetails: 'insurancedetails@https://nagp-insurance.netlify.app/remoteEntry.js',
       },
       shared: { 'react': { singleton: true }, "react-dom": { singleton: true } },
     }),
