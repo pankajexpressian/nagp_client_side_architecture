@@ -58,11 +58,11 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './public/index.html',
     }),
-    // Copy worker.js from src to dist folder
-    new CopyPlugin({
-      patterns: [
-        { from: './src/worker.js', to: 'worker.js' }
-      ]
-    })
+    // // Copy worker.js from src to dist folder
+    // new CopyPlugin({
+    //   patterns: [
+    //     { from: './src/worker.js', to: 'worker.js' }
+    //   ]
+    // })
   ],
 };

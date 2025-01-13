@@ -28,30 +28,30 @@ const InsuranceDetails = ({ insuranceDetails }) => {
   
   useEffect(() => {
 
-    try {
+    // try {
       
-      async function loadWorker() {
-        const newWorker = await createWorker(__webpack_public_path__ + "worker.js");
-        console.log("Worker loaded:", newWorker);
-        setWorker(newWorker);
+    //   async function loadWorker() {
+    //     const newWorker = await createWorker(__webpack_public_path__ + "worker.js");
+    //     console.log("Worker loaded:", newWorker);
+    //     setWorker(newWorker);
   
        
-        newWorker.onmessage = (e) => {
-          console.log("Received from worker:", e.data);
-          setMessageFromWorker(e.data); 
-        };
+    //     newWorker.onmessage = (e) => {
+    //       console.log("Received from worker:", e.data);
+    //       setMessageFromWorker(e.data); 
+    //     };
   
-        newWorker.onerror = (e) => {
-          console.error("Error in worker:", e);
-        };
+    //     newWorker.onerror = (e) => {
+    //       console.error("Error in worker:", e);
+    //     };
   
-        setWorkerReady(true); 
-      }
+    //     setWorkerReady(true); 
+    //   }
   
-      loadWorker(); 
-    } catch (error) {
+    //   loadWorker(); 
+    // } catch (error) {
       
-    }
+    // }
 
     const handleMessageEvent = (event) => {
       
@@ -103,12 +103,12 @@ const InsuranceDetails = ({ insuranceDetails }) => {
 
   return (
     <Fragment>
-      <div className="card shadow-lg mb-4">
+      {/* <div className="card shadow-lg mb-4">
         <div className="card-header bg-dark text-white">
           <h3>Fun Fact</h3>
         </div>
         <div className="card-body">{messageFromWorker}</div>
-      </div>
+      </div> */}
 
 
       <div className="row">
