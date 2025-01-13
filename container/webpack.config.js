@@ -55,7 +55,7 @@ module.exports = {
     new ModuleFederationPlugin({
       name: "shellapp",
       remotes: {
-        userdetails: 'userdetails@http://localhost:3001/remoteEntry.js',
+        userdetails: 'userdetails@https://nagp-users.netlify.app/remoteentry.js',
         insurancedetails: 'insurancedetails@http://localhost:3002/remoteEntry.js',
       },
       shared: { 'react': { singleton: true }, "react-dom": { singleton: true } },
