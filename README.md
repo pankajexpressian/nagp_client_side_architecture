@@ -73,6 +73,7 @@ This is a micro-frontend app responsible for displaying the user's insurance det
 | Git Link to code for your application (Container app + 2 MFEs) | https://github.com/pankajexpressian/nagp_client_side_architecture/tree/main          |
 | Readme file with instructions                     | https://github.com/pankajexpressian/nagp_client_side_architecture/blob/main/README.md          |
 | Video recording showing all parameters (Running and hosted Containers, MFEs) | Provided          |
+| (Bonus) Live site link | https://nagp-conatiner.netlify.app,  https://nagp-conatiner.netlify.app/login |
 
 ---
 
@@ -116,9 +117,13 @@ npm start
 
 
 - All apps are now running. Use the container app running at http://localhost:3000 to validate the functionality.
-- Inside the insurance folder under src folder you’ll see a file named seeder.js. Open it and copy any of the email Id from the static user.
+- Inside the container folder under src folder you’ll see a file named [Seeder.js](https://github.com/pankajexpressian/nagp_client_side_architecture/blob/main/container/src/Seeder.js)
+. Open it and copy any of the email Id from the static users.
 - Ender the copied email id on the login screen and click login.
+- Or, you can copy any of the below emails and sign-in
+- arjun.patel@example.com
+- pj@abc.com
 
 
-## Please note, having node js and npm installed on your machine is a must to run React app.
+## Please note, having node js and npm installed on your machine is a must to run this app.
 
