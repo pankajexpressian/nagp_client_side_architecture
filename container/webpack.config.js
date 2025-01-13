@@ -7,16 +7,21 @@ module.exports = {
   mode: "development",
   devServer: {
     static: path.join(__dirname, "dist"),
-    port: 3000,
+    // port: 3000,
     historyApiFallback: true,
-    proxy: [
-      {
-        context: ['/src_worker_js.js'], 
-        target: 'https://nagp-users.netlify.app', 
-        changeOrigin: true,              
-        secure: false,                   
-      },
-    ],
+    headers: {
+      'Access-Control-Allow-Origin': '*',  // Allow any origin during development
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    },
+    // proxy: [
+    //   {
+    //     context: ['/src_worker_js.js'], 
+    //     target: 'https://nagp-users.netlify.app', 
+    //     changeOrigin: true,              
+    //     secure: false,                   
+    //   },
+    // ],
   },
   output: {
     publicPath: "auto",

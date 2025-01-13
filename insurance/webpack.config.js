@@ -7,7 +7,11 @@ module.exports = {
   mode: "development",
   devServer: {
     static: path.join(__dirname, "dist"),
-    port: 3002,
+    headers: {
+      'Access-Control-Allow-Origin': '*',  
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS', 
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization', 
+    }
   },
   output: {
     publicPath: "auto",
