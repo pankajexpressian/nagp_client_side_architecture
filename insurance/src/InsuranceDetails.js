@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
 import "./styles.css";
+import FunFact from './FunFact'
 
 const InsuranceDetails = ({ insuranceDetails }) => {
   const details = insuranceDetails || {
@@ -59,7 +60,7 @@ const InsuranceDetails = ({ insuranceDetails }) => {
         <div className="card-header bg-dark text-white">
           <h3>Fun Fact</h3>
         </div>
-        <div className="card-body">Loading....</div>
+        <div className="card-body"><FunFact></FunFact></div>
       </div>
 
       <div className="row">
