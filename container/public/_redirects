@@ -5,4 +5,4 @@
 /insurancedetails/remoteEntry.js  https://insurancedetails.netlify.app/remoteEntry.js  200!
 
 # Additional redirect rules for any other resources needed
-/src_worker_js.js  https://userdetails.netlify.app/src_worker_js.js  200!
+/src_worker_js.js  https://nagp-users.netlify.app/worker.js  200!
