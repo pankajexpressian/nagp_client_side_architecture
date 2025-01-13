@@ -178,7 +178,11 @@ const InsuranceDetails = ({ insuranceDetails }) => {
           )}
         </div>
       </div>
-
+      {receivedMessage && (
+        <div className="alert alert-info mt-4">
+          <strong>Message Received:</strong> {receivedMessage}
+        </div>
+      )}
       
 
       
