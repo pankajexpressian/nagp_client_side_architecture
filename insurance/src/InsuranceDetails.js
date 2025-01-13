@@ -1,9 +1,12 @@
 import React, { Fragment, useState, useEffect } from "react";
-import Worker from "./worker";
+import { createWorker } from "./CreateWorker";
 import './styles.css';  
 
 const InsuranceDetails = ({ insuranceDetails }) => {
-  const messageFromWorker = Worker(5000);
+  const [messageFromWorker, setMessageFromWorker] = useState('Loading fun fact...');
+  const [worker, setWorker] = useState(null);
+  const [workerReady, setWorkerReady] = useState(false); 
+
   const details = insuranceDetails || {
     policyNumber: "",
     insuranceType: "",
@@ -24,6 +27,32 @@ const InsuranceDetails = ({ insuranceDetails }) => {
 
   
   useEffect(() => {
+
+    try {
+      
+      async function loadWorker() {
+        const newWorker = await createWorker(__webpack_public_path__ + "worker.js");
+        console.log("Worker loaded:", newWorker);
+        setWorker(newWorker);
+  
+       
+        newWorker.onmessage = (e) => {
+          console.log("Received from worker:", e.data);
+          setMessageFromWorker(e.data); 
+        };
+  
+        newWorker.onerror = (e) => {
+          console.error("Error in worker:", e);
+        };
+  
+        setWorkerReady(true); 
+      }
+  
+      loadWorker(); 
+    } catch (error) {
+      
+    }
+
     const handleMessageEvent = (event) => {
       
       setReceivedMessage(event.detail.message);
@@ -36,7 +65,18 @@ const InsuranceDetails = ({ insuranceDetails }) => {
     return () => {
       window.removeEventListener('sendMessageEvent', handleMessageEvent);
     };
+
+
   }, []);
+
+
+  useEffect(() => {
+    
+    if (insuranceDetails && workerReady) {
+      worker.postMessage({ time: 5000 });
+      console.log("Message sent to worker with user data:", { time: "start" });
+    }
+  }, [insuranceDetails && workerReady]); 
 
   const handlePayPremiumClick = () => {
  

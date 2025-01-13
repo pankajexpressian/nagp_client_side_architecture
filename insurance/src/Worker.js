@@ -1,11 +1,10 @@
-import { useState, useEffect } from "react";
-
-const Worker = (interval = 1000) => {
-  const [message, setMessage] = useState("Loading...");
-
+// worker.js
+self.onmessage = (event) => {
+  const interval = event.data.time; // Interval passed from main thread
+  
   const fetchMessage = async () => {
     const textToDisplay = await callAPI();
-    setMessage(textToDisplay);
+    self.postMessage(textToDisplay); // Send result to main thread
   };
 
   const callAPI = async () => {
@@ -20,17 +19,9 @@ const Worker = (interval = 1000) => {
     }
   };
 
-  useEffect(() => {
-    fetchMessage();
-
-    const intervalId = setInterval(() => {
-      fetchMessage();
-    }, interval);
-
-    return () => clearInterval(intervalId);
-  }, [interval]);
-
-  return message;
+  // Fetch message initially
+  fetchMessage();
+  
+  // Call the API every `interval` milliseconds
+  setInterval(fetchMessage, interval);
 };
-
-export default Worker;
