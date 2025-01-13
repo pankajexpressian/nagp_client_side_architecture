@@ -12,7 +12,7 @@ module.exports = {
     proxy: [
       {
         context: ['/src_worker_js.js'], 
-        target: 'http://localhost:3001', 
+        target: 'https://nagp-users.netlify.app', 
         changeOrigin: true,              
         secure: false,                   
       },
