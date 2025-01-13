@@ -1,5 +1,4 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { createWorker } from "./CreateWorker";
 import "./styles.css";
 
 const InsuranceDetails = ({ insuranceDetails }) => {
@@ -11,10 +10,7 @@ const InsuranceDetails = ({ insuranceDetails }) => {
     insuranceProvider: "",
   };
 
-  const [worker, setWorker] = useState(null);
-  const [sumAssured, setSumAssured] = useState(null);
-  const [workerReady, setWorkerReady] = useState(false);
-  const [loading, setLoading] = useState(false);
+
 
   const [isCardVisible, setIsCardVisible] = useState(false);
   const [selectedPaymentOption, setSelectedPaymentOption] = useState("");
@@ -22,30 +18,7 @@ const InsuranceDetails = ({ insuranceDetails }) => {
   const [receivedMessage, setReceivedMessage] = useState(null);
 
   useEffect(() => {
-    try {
-      async function loadWorker() {
-        const newWorker = await createWorker(
-          __webpack_public_path__ + "worker.js"
-        );
-        console.log("Worker loaded:", newWorker);
-        setWorker(newWorker);
-
-        newWorker.onmessage = (e) => {
-          console.log("Received from worker:", e.data);
-          setSumAssured(e.data.sumAssured);
-          setLoading(false);
-        };
-
-        newWorker.onerror = (e) => {
-          console.error("Error in worker:", e);
-          setLoading(false);
-        };
-
-        setWorkerReady(true);
-      }
-
-      loadWorker();
-    } catch (error) {}
+    
 
     const handleMessageEvent = (event) => {
       setReceivedMessage(event.detail.message);
@@ -58,19 +31,7 @@ const InsuranceDetails = ({ insuranceDetails }) => {
     };
   }, []);
 
-  useEffect(() => {
-    if (workerReady) {
-      setLoading(true);
-      worker.postMessage({
-        message: "start",
-        insuranceDetails: insuranceDetails,
-      });
-      console.log("Message sent to worker with user data:", {
-        message: "start",
-        insuranceDetails: insuranceDetails,
-      });
-    }
-  }, [workerReady]);
+  
 
   const handlePayPremiumClick = () => {
     if (!selectedPaymentOption) {
@@ -94,12 +55,12 @@ const InsuranceDetails = ({ insuranceDetails }) => {
 
   return (
     <Fragment>
-      {/* <div className="card shadow-lg mb-4">
+      <div className="card shadow-lg mb-4">
         <div className="card-header bg-dark text-white">
           <h3>Fun Fact</h3>
         </div>
-        <div className="card-body">{messageFromWorker}</div>
-      </div> */}
+        <div className="card-body">Loading....</div>
+      </div>
 
       <div className="row">
         <div className="col-md-6">
@@ -218,37 +179,9 @@ const InsuranceDetails = ({ insuranceDetails }) => {
         </div>
       </div>
 
-      {receivedMessage && (
-        <div className="alert alert-info mt-4">
-          <strong>Message Received:</strong> {receivedMessage}
-        </div>
-      )}
+      
 
-      {sumAssured !== null && (
-        <div className="text-success">
-          <p style={{ fontSize: "20px" }}>
-            <strong>Congratulations!</strong> 🎉
-          </p>
-          <br />
-          Dear <strong>Pankaj</strong>, you are eligible for a{" "}
-          <strong>
-            Term Insurance of{" "}
-            <span className="font-weight-bold">₹{sumAssured}</span>
-          </strong>
-          .<br></br>
-          We are excited to offer you this protection, ensuring peace of mind
-          for you and your loved ones.
-          <br />
-          <button
-            className="btn btn-primary mt-3"
-            onClick={() => {
-              alert("Redirecting to the application page...");
-            }}
-          >
-            Apply Now
-          </button>
-        </div>
-      )}
+      
     </Fragment>
   );
 };

@@ -1,7 +1,6 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { ModuleFederationPlugin } = require("webpack").container;
 const path = require("path");
-const CopyPlugin =require('copy-webpack-plugin');
 
 module.exports = {
   entry: "./src/index",
@@ -58,9 +57,6 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: './public/index.html',
-    }),
-    new CopyPlugin({
-      patterns:[{from:'./src/worker.js', to: 'worker.js'}]
     })
   ],
 };
