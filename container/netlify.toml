@@ -3,3 +3,9 @@
   to = "/"
   status = 200
   force = true
+
+  [[redirects]]
+  from = "/landingpage"
+  to = "/"
+  status = 200
+  force = true
